@@ -1,4 +1,3 @@
-using Auth.Domain.DatabaseModals;
 using Base.Api;
 using Base.Services;
 using Base.Shared.Config;

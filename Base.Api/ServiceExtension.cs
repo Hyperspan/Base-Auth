@@ -2,7 +2,6 @@
 using Auth.Domain.DatabaseModals;
 using Base.Shared.Config;
 using Microsoft.AspNetCore.Identity;
-using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -57,8 +56,8 @@ namespace Base.Api
 
                     bearer.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appConfig.JwtSecurityKey)),
                         ValidateIssuerSigningKey = true,
                         RoleClaimType = ClaimTypes.Role,

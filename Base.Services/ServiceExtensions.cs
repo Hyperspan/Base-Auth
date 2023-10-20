@@ -1,8 +1,5 @@
-﻿using Auth.Domain.Context;
-using Auth.Domain.DatabaseModals;
-using Base.Database;
+﻿using Base.Database;
 using Base.Services.Auth;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Base.Services
