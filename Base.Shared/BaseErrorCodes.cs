@@ -1,9 +1,13 @@
 ﻿namespace Base.Shared
 {
-    public static class BaseErrorCodes
+    public class BaseErrorCodes
     {
+        public BaseErrorCodes()
+        {
+            ErrorMessages = _errorMessages;
+        }
 
-        public static IDictionary<string, string> ErrorMessages { get; set; } = new Dictionary<string, string>
+        protected internal IDictionary<string, string> _errorMessages = new Dictionary<string, string>()
         {
             { UnknownSystemException, "Some Unknown Error occurred" },
             { NotImplemented, "Method not implemented" },
@@ -22,12 +26,15 @@
             { NullConnectionString, "The connection string passed was null." }
         };
 
+        public IDictionary<string, string> ErrorMessages { get; }
+
 
         #region 00 System
         public const string UnknownSystemException = "00SYS001";
         public const string NotImplemented = "00SYS002";
         public const string ArgumentNull = "00SYS003";
         public const string NullValue = "00SYS004";
+
         #endregion
 
         #region 01 Authentication
@@ -44,7 +51,7 @@
         #region 02 Database
 
         public const string NullConnectionString = "02DB001";
-        
+
         #endregion
 
     }

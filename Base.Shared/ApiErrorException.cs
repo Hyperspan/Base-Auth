@@ -5,13 +5,13 @@
         public string ErrorCode { get; set; }
 
         public ApiErrorException(string errorCode)
-            : base(errorCode + " => " + BaseErrorCodes.ErrorMessages[errorCode])
+            : base(errorCode + " : " + new BaseErrorCodes().ErrorMessages[errorCode])
         {
             ErrorCode = errorCode;
         }
 
         public ApiErrorException(string errorCode, string message)
-            : base(errorCode + " => " + message)
+            : base(errorCode + " : " + message)
         {
             ErrorCode = errorCode;
         }
