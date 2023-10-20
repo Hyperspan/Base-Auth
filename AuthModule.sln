@@ -19,17 +19,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{E561B17D-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InventoryManagement", "InventoryManagement", "{2EEE8ACA-0178-401A-9087-8F4EEC632DC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Interfaces", "InventoryManagement\Inventory.Interfaces\Inventory.Interfaces.csproj", "{B6C04E0F-5EA8-470E-BEDB-5117594FF686}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Interfaces", "InventoryManagement\Inventory.Interfaces\Inventory.Interfaces.csproj", "{B6C04E0F-5EA8-470E-BEDB-5117594FF686}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Shared", "InventoryManagement\Inventory.Shared\Inventory.Shared.csproj", "{CEF87471-E0CA-4EDF-8BCE-62F95B973C91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Shared", "InventoryManagement\Inventory.Shared\Inventory.Shared.csproj", "{CEF87471-E0CA-4EDF-8BCE-62F95B973C91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Services", "InventoryManagement\Inventory.Services\Inventory.Services.csproj", "{70CEE1CE-D6AF-4131-B17D-E451D4316690}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Services", "InventoryManagement\Inventory.Services\Inventory.Services.csproj", "{70CEE1CE-D6AF-4131-B17D-E451D4316690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Api", "Base.Api\Base.Api.csproj", "{D8D3E37D-A5F2-40AE-9809-0273C75966A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Api", "Base.Api\Base.Api.csproj", "{D8D3E37D-A5F2-40AE-9809-0273C75966A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Services", "Base.Services\Base.Services.csproj", "{5B31FAFD-88E6-4989-8D12-28A5240F8F2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Services", "Base.Services\Base.Services.csproj", "{5B31FAFD-88E6-4989-8D12-28A5240F8F2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Database", "Base.Database\Base.Database.csproj", "{BA607ACB-DCFF-4CE1-8A43-97075DF574F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Database", "Base.Database\Base.Database.csproj", "{BA607ACB-DCFF-4CE1-8A43-97075DF574F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

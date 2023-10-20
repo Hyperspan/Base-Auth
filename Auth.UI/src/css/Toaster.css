@@ -1,0 +1,50 @@
+.toast-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 300px;
+    height: 100vh;
+}
+
+
+.toast.show .toast-heading {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    padding: 5px 15px;
+    border-bottom: 1px solid;
+}
+
+.toast {
+    color: white !important;
+    background-color: var(--bs-info);
+}
+
+.toast svg {
+    color: white;
+}
+
+.toast-heading h4 {
+    font-size: 18px;
+}
+
+.toast.toast-primary {
+    background-color: var(--bs-primary);
+}
+
+.toast.toast-success {
+    background-color: var(--bs-success);
+}
+
+.toast.toast-danger {
+    background-color: var(--bs-danger);
+}
+
+.toast.toast-info {
+    background-color: var(--bs-info);
+}
+
+.toast.toast-warning {
+    background-color: var(--bs-warning);
+}

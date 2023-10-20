@@ -18,13 +18,11 @@ namespace Base.Api.Controllers
 
         [HttpPost("register")]
         public async Task<ApiResponseModal<RegisterResponse>> RegisterUserAsync(RegisterUserRequest request)
-            => await _userService.RegisterUser(request, true);
+            => await _userService.RegisterUser(request);
 
         [HttpPost("Login")]
         public async Task<ApiResponseModal<LoginResponse>> LoginUserAsync(LoginUserRequest request)
-            => await _userService.UserLogin(request, true);
-
-
+            => await _userService.UserLogin(request);
 
         [HttpPost("ChangePassword")]
         public async Task<ApiResponseModal> ChangePassword(object userDetails)

@@ -11,7 +11,7 @@ public class RegisterUserRequest
     public string Email { get; set; } = string.Empty;
 
     [MaxLength(15), Required]
-    public string MobileNo { get; set; } = string.Empty;
+    public string MobileNumber { get; set; } = string.Empty;
 
     [Compare("ConfirmPassword"), Required]
     public string Password { get; set; } = string.Empty;

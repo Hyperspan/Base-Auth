@@ -2,6 +2,7 @@
 using Auth.Shared.Requests;
 using Base.Services.Auth;
 using Base.Shared.Modals;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Base.Api.Controllers
@@ -17,15 +18,16 @@ namespace Base.Api.Controllers
             _roleService = roleService;
         }
 
-        [HttpPost]
-        public async Task<ApiResponseModal> CreateRoleAsync(CreateRoleRequest request)
-            => await _roleService.CreateRoleAsync(request);
+        //[HttpPost]
+        //public async Task<ApiResponseModal> CreateRoleAsync(CreateRoleRequest request)
+        //    => await _roleService.CreateRoleAsync(request);
 
         [HttpGet]
         public async Task<ApiResponseModal<List<ApplicationRole<Guid>>>> ListAllRolesAsync()
             => await _roleService.ListAllRolesAsync();
 
         [HttpPost("assign-role")]
+        [Authorize]
         public async Task<ApiResponseModal<ApplicationRole<Guid>>> AssignUserRole(AssignUserRoleRequest<Guid> request)
             => await _roleService.AssignUserRole(request);
 

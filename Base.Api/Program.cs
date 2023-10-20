@@ -2,6 +2,7 @@ using Auth.Domain.DatabaseModals;
 using Base.Api;
 using Base.Services;
 using Base.Shared.Config;
+using RamsonDevelopers.UtilEmail;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,15 +16,27 @@ builder.Services.AddSwaggerGen();
 IConfiguration config = builder.Configuration;
 var appConfiguration = config.GetSection(AppConfiguration.Label);
 var connectionStrings = config.GetSection(ConnectionString.Label).Get<ConnectionString>();
+var emailConfig = config.GetSection(EmailConfig.SectionLabel);
 
 
 builder.Services.AddOptions();
 builder.Services.Configure<AppConfiguration>(appConfiguration);
+builder.Services.Configure<EmailConfig>(emailConfig);
+builder.Services.AddEmailService();
 
 builder.Services.AddBaseServices(connectionStrings.PgDatabase);
 builder.Services.AddAppIdentity<Guid>();
 builder.Services.AddJwtAuthentication(appConfiguration.Get<AppConfiguration>());
 
+builder.Services.AddCors(cors =>
+{
+    cors.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -34,6 +47,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

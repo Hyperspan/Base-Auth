@@ -1,22 +1,36 @@
-﻿using Auth.Domain.DatabaseModals;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Auth.Domain.DatabaseModals;
 using Auth.Interfaces;
 using Auth.Shared.Enums;
 using Auth.Shared.Requests;
 using Auth.Shared.Responses;
 using Base.Shared;
+using Base.Shared.Config;
 using Base.Shared.Modals;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using RamsonDevelopers.UtilEmail;
 
 namespace Auth.Services
 {
-    public abstract class UserService<T> : IUserService<T> where T :
+    public class UserService<T> : IUserService<T> where T :
                                   IEquatable<T>
     {
         private readonly UserManager<ApplicationUser<T>> _userManager;
+        private readonly IEmailService _emailService;
+        private readonly AppConfiguration _appConfig;
 
-        protected UserService(UserManager<ApplicationUser<T>> userManager)
+        public UserService(
+            UserManager<ApplicationUser<T>> userManager,
+            IEmailService emailService,
+            IOptions<AppConfiguration> options)
         {
             _userManager = userManager;
+            _emailService = emailService;
+            _appConfig = options.Value;
         }
 
         /// <summary>
@@ -35,9 +49,7 @@ namespace Auth.Services
                 if (existingUser != null)
                 {
                     // Return if is an existing user
-                    return await ApiResponseModal<RegisterResponse>.FatalAsync(
-                        new ApiErrorException("User with same email address already exists."),
-                        BaseErrorCodes.EmailTaken);
+                    return await ApiResponseModal<RegisterResponse>.FatalAsync(new ApiErrorException(BaseErrorCodes.EmailTaken), BaseErrorCodes.EmailTaken);
                 }
 
                 // create user's record
@@ -48,7 +60,7 @@ namespace Auth.Services
                     Email = userDetails.Email,
                     NormalizedEmail = userDetails.UserName.ToUpper(),
                     EmailConfirmed = !requireEmailVerification,
-                    PhoneNumber = userDetails.MobileNo,
+                    PhoneNumber = userDetails.MobileNumber,
                     PhoneNumberConfirmed = !requireEmailVerification,
                     // Check if requireEmailVerification is true
                     RegistrationStage = requireEmailVerification
@@ -59,13 +71,13 @@ namespace Auth.Services
 
                 var userResponse = await _userManager.CreateAsync(applicationUser, userDetails.Password);
 
-                if (userResponse is null or { Errors: { } })
+                if (userResponse is not { Succeeded: true })
                 {
                     throw new ApiErrorException(BaseErrorCodes.IdentityError);
                 }
 
                 // if true then send confirm email
-                await SendRegistrationEmail(applicationUser.Email);
+                await SendRegistrationEmail(applicationUser.UserName, applicationUser.Email);
                 // Return newly created user back
                 var response = new RegisterResponse
                 {
@@ -78,7 +90,7 @@ namespace Auth.Services
             }
             catch (ApiErrorException e)
             {
-                return await ApiResponseModal<RegisterResponse>.FatalAsync(e, BaseErrorCodes.UnknownSystemException);
+                return await ApiResponseModal<RegisterResponse>.FatalAsync(e, e.ErrorCode);
             }
         }
 
@@ -97,7 +109,11 @@ namespace Auth.Services
                 // Throw exception of UserNotFound if user is null.
                 if (user == null)
                 {
-                    throw new ApiErrorException(BaseErrorCodes.UserNotFound);
+
+                    user = await _userManager.FindByEmailAsync(loginUserRequest.UserName);
+
+                    if (user is null)
+                        throw new ApiErrorException(BaseErrorCodes.UserNotFound);
                 }
 
                 if (requireEmailVerification && !user.EmailConfirmed)
@@ -114,7 +130,7 @@ namespace Auth.Services
                         RegistrationStages.MobileVerification =>
                             new ApiErrorException(BaseErrorCodes.MobileNotVerified),
                         RegistrationStages.None => new ApiErrorException(BaseErrorCodes.MobileNotVerified),
-                        _ => throw new ArgumentOutOfRangeException(BaseErrorCodes.UnknownSystemException)
+                        _ => throw new ApiErrorException(BaseErrorCodes.ArgumentNull)
                     };
                 }
 
@@ -167,16 +183,59 @@ namespace Auth.Services
         /// Abstract method to Send Emails after registration to verify
         /// </summary>
         /// <returns>Task</returns>
-        public abstract Task SendRegistrationEmail(string emailAddress);
+        public virtual async Task SendRegistrationEmail(string name, string emailAddress)
+        {
+
+            var request = new SendEmailRequest
+            {
+                ToAddresses = new List<EmailAddress>
+                {
+                    new(name, emailAddress)
+                },
+                Subject = "Registration Successful",
+                Body =
+                    @$"You have successfully registered to {_appConfig.ApplicationName}. 
+                        Please verify your email address to move forward"
+            };
+
+            await _emailService.SendEMailAsync(request);
+        }
 
         /// <summary>
         /// Abstract Method to Generate Jwt Token based on roles and claims assigned to user
         /// </summary>
         /// <param name="user">The User whose token should be generated.</param>
         /// <returns>the Jwt Token</returns>
-        public abstract Task<string> GenerateJwtTokenAsync(ApplicationUser<T> user);
+        public virtual Task<string> GenerateJwtTokenAsync(ApplicationUser<T> user)
+        {
+            var signingCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appConfig.JwtSecurityKey)), "HS256");
 
-        public abstract Task MobileVerification(ApplicationUser<T> userDetails);
-        public abstract Task EmailVerification(ApplicationUser<T> userDetails);
+            var jwtIssuer = _appConfig.JwtIssuer;
+            var jwtAudience = _appConfig.JwtAudience;
+            var expires = DateTime.UtcNow.AddHours(_appConfig.JwtExpiry);
+            var notBefore = new DateTime?();
+
+            var encryptedToken = new JwtSecurityTokenHandler()
+                .WriteToken(new JwtSecurityToken(jwtIssuer, jwtAudience, new List<Claim>
+                {
+                    new("UserId", user.Id.ToString()),
+                    new("UserEmail", user.Email!),
+                    new("UserName", user.UserName),
+                },
+                    notBefore, expires, signingCredentials));
+
+            return Task.FromResult(encryptedToken);
+        }
+
+
+        public virtual Task MobileVerification(ApplicationUser<T> userDetails)
+                        => throw new NotImplementedException();
+
+
+        public virtual Task EmailVerification(ApplicationUser<T> userDetails)
+                       => throw new NotImplementedException();
+
+
     }
 }
