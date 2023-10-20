@@ -6,14 +6,47 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using Base.Database;
+using Base.Services;
 using Base.Shared.Modals;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using RamsonDevelopers.UtilEmail;
 
 namespace Base.Api
 {
     public static class ServiceExtension
     {
+        public static IServiceCollection AddBaseApi(this IServiceCollection services, IConfiguration config)
+        {
+            var appConfiguration = config.GetSection(AppConfiguration.Label);
+            var connectionStrings = config.GetSection(ConnectionString.Label).Get<ConnectionString>();
+            var emailConfig = config.GetSection(EmailConfig.SectionLabel);
+
+
+            services.AddOptions();
+            services.Configure<AppConfiguration>(appConfiguration);
+            services.Configure<EmailConfig>(emailConfig);
+            services.AddEmailService();
+            services.AddBaseServices(connectionStrings.PgDatabase);
+            services.AddAppIdentity<Guid>();
+            services.AddJwtAuthentication(appConfiguration.Get<AppConfiguration>());
+
+            services.AddCors(cors =>
+            {
+                cors.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
+
+            return services;
+        }
+
 
         /// <summary>
         /// Add the identity Services to help in using the ASP net Identity.
@@ -102,5 +135,6 @@ namespace Base.Api
             serviceCollection.AddHttpContextAccessor();
             return serviceCollection;
         }
+
     }
 }

@@ -1,8 +1,11 @@
 {
   "name": "auth-ui",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "1.0.0",
   "type": "module",
+  "main": "src/main.tsx",
+  "files": ["src/**/*"],
+
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
@@ -38,5 +41,8 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
+  },
+  "publishConfig": {
+    "registry": "https://npm.ramson-developers.com"
   }
 }
