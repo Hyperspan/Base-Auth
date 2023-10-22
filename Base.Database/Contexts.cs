@@ -1,7 +1,8 @@
-﻿using Auth.Domain.Context;
+﻿using Hyperspan.Auth.Domain.Context;
+using Hyperspan.Settings.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Base.Database
+namespace Hyperspan.Base.Database
 {
     public class Contexts : AuthContext<Guid>
     {
@@ -9,5 +10,21 @@ namespace Base.Database
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<SettingsMaster>(entity =>
+            {
+                entity.ToTable("Masters", schema: "Settings");
+                entity.HasKey(x => x.Id);
+                entity.HasIndex(x => x.SettingLabel);
+                entity.HasOne(x => x.Parent)
+                    .WithMany()
+                    .HasForeignKey(x => x.ParentId);
+            });
+        }
     }
+
 }

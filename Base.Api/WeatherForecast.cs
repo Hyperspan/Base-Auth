@@ -1,4 +1,4 @@
-namespace Base.Api
+namespace Hyperspan.Base.Api
 {
     public class WeatherForecast
     {

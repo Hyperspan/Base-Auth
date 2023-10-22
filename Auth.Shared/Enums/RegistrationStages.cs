@@ -1,5 +1,4 @@
-﻿
-namespace Auth.Shared.Enums;
+﻿namespace Hyperspan.Auth.Shared.Enums;
 
 public enum RegistrationStages
 {

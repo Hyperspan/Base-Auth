@@ -1,4 +1,6 @@
-﻿namespace Base.Shared
+﻿#pragma warning disable CS1591
+
+namespace Hyperspan.Base.Shared
 {
     public class BaseErrorCodes
     {
@@ -9,11 +11,15 @@
 
         protected internal IDictionary<string, string> _errorMessages = new Dictionary<string, string>()
         {
+            #region 00 System
+
             { UnknownSystemException, "Some Unknown Error occurred" },
             { NotImplemented, "Method not implemented" },
             { ArgumentNull, "The argument passed was null." },
             { NullValue, "The value is null" },
+            #endregion
 
+            #region 01 Auth
             { EmailTaken, "This email address is already taken" },
             { PasswordNotStrong, "Password is not strong enough. Please try another password." },
             { IncorrectCredentials, "Credentials provided are not correct." },
@@ -22,8 +28,15 @@
             { MobileNotVerified, "Mobile No. is not verified." },
             { RoleExists, "The Role already exists in the database." },
             { IdentityError, "Something went wrong. While processing the request." },
+            #endregion
 
-            { NullConnectionString, "The connection string passed was null." }
+            #region 02 Database
+            { NullConnectionString, "The connection string passed was null." },
+            #endregion
+
+            #region 03 Settings
+            { SettingNotFound, "The setting requested does not exists." }
+            #endregion
         };
 
         public IDictionary<string, string> ErrorMessages { get; }
@@ -51,6 +64,13 @@
         #region 02 Database
 
         public const string NullConnectionString = "02DB001";
+
+        #endregion
+
+
+        #region 03 Settings
+
+        public const string SettingNotFound = "03SET001";
 
         #endregion
 

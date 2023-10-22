@@ -1,4 +1,4 @@
-﻿namespace Auth.Shared
+﻿namespace Hyperspan.Auth.Shared
 {
     public class AuthSettings
     {

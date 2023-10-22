@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
-using Auth.Interfaces;
-using Base.Shared.Config;
+using Hyperspan.Auth.Interfaces;
+using Hyperspan.Base.Shared.Config;
 using Microsoft.AspNetCore.Http;
 
-namespace Auth.Services
+namespace Hyperspan.Auth.Services
 {
     public abstract class CurrentUserService<T> : ICurrentUserService<T> where T : IEquatable<T>, IBaseEntity<T>
     {
@@ -18,7 +18,7 @@ namespace Auth.Services
 
             if (claimsPrincipal != null)
             {
-                
+
                 UserName = claimsPrincipal.FindFirstValue(ClaimTypes.Name);
                 Email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
             }

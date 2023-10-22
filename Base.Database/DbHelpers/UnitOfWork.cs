@@ -1,12 +1,12 @@
-﻿using Base.Shared;
-using Base.Shared.Config;
+﻿using Hyperspan.Base.Shared;
+using Hyperspan.Base.Shared.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections;
 
-namespace Base.Database.DbHelpers
+namespace Hyperspan.Base.Database.DbHelpers
 {
-    public class UnitOfWork<T, TId, TContext>
+    public class UnitOfWork<T, TId, TContext> : IUnitOfWork<T, TId, TContext>
         where TId : IEquatable<TId>
         where T : class
         where TContext : DbContext

@@ -1,11 +1,11 @@
-﻿using Auth.Domain.DatabaseModals;
-using Auth.Shared.Requests;
-using Base.Services.Auth;
-using Base.Shared.Modals;
+﻿using Hyperspan.Auth.Domain.DatabaseModals;
+using Hyperspan.Auth.Shared.Requests;
+using Hyperspan.Base.Services.Auth;
+using Hyperspan.Base.Shared.Modals;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Base.Api.Controllers
+namespace Hyperspan.Base.Api.Controllers
 {
     [ApiController]
     [Route("api/account/roles")]

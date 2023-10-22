@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Auth.Shared.Requests
+namespace Hyperspan.Auth.Shared.Requests
 {
     public class CreateRoleRequest
     {

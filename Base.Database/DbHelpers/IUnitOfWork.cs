@@ -1,9 +1,8 @@
-﻿
-using Base.Shared.Config;
+﻿using Hyperspan.Base.Shared.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Base.Database.DbHelpers
+namespace Hyperspan.Base.Database.DbHelpers
 {
     public interface IUnitOfWork<T, TId, TContext>
         where TId : IEquatable<TId>

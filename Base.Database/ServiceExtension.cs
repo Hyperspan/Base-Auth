@@ -1,9 +1,9 @@
-﻿using Base.Database.DbHelpers;
-using Base.Shared;
+﻿using Hyperspan.Base.Database.DbHelpers;
+using Hyperspan.Base.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Base.Database
+namespace Hyperspan.Base.Database
 {
     public static class ServiceExtension
     {

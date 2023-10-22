@@ -1,8 +1,8 @@
-﻿using Auth.Shared.Requests;
-using Auth.Shared.Responses;
-using Base.Shared.Modals;
+﻿using Hyperspan.Auth.Shared.Requests;
+using Hyperspan.Auth.Shared.Responses;
+using Hyperspan.Base.Shared.Modals;
 
-namespace Auth.Interfaces
+namespace Hyperspan.Auth.Interfaces
 {
     public interface IUserService<T> where T : IEquatable<T>
     {

@@ -1,4 +1,4 @@
-﻿namespace Base.Shared
+﻿namespace Hyperspan.Base.Shared
 {
     public class ApiErrorException : Exception
     {

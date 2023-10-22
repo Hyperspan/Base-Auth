@@ -1,4 +1,4 @@
-﻿namespace Auth.Shared.Requests
+﻿namespace Hyperspan.Auth.Shared.Requests
 {
     public class RemoveUserRoleRequest<T>
     {

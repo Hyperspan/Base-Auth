@@ -1,11 +1,11 @@
-﻿using Auth.Domain.DatabaseModals;
-using Auth.Services;
-using Base.Shared.Config;
+﻿using Hyperspan.Auth.Domain.DatabaseModals;
+using Hyperspan.Auth.Services;
+using Hyperspan.Base.Shared.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using RamsonDevelopers.UtilEmail;
 
-namespace Base.Services.Auth
+namespace Hyperspan.Base.Services.Auth
 {
     public class UserService : UserService<Guid>, IUserService
     {
