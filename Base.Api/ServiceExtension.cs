@@ -15,7 +15,6 @@ using Hyperspan.Base.Shared.Modals;
 using Hyperspan.Base.Database;
 using Hyperspan.Base.Services;
 using Hyperspan.Settings.Api;
-using Hyperspan.Settings.Services;
 
 namespace Hyperspan.Base.Api
 {
@@ -24,7 +23,6 @@ namespace Hyperspan.Base.Api
         public static IServiceCollection AddBaseApi(this IServiceCollection services, IConfiguration config)
         {
             var appConfiguration = config.GetSection(AppConfiguration.Label);
-            var connectionStrings = config.GetSection(ConnectionString.Label).Get<ConnectionString>();
             var emailConfig = config.GetSection(EmailConfig.SectionLabel);
 
 
@@ -32,7 +30,7 @@ namespace Hyperspan.Base.Api
             services.Configure<AppConfiguration>(appConfiguration);
             services.Configure<EmailConfig>(emailConfig);
             services.AddEmailService();
-            services.AddBaseServices(connectionStrings.PgDatabase);
+            services.AddBaseServices();
             services.AddAppIdentity<Guid>();
             services.AddJwtAuthentication(appConfiguration.Get<AppConfiguration>());
             services.AddSettingsApi();
