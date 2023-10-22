@@ -37,8 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings.Shared", "Settings.Shared\Hyperspan.Settings.Shared.csproj", "{076686CB-D277-421D-8C3C-2F23AD287ABE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Erp", "Erp", "{190DEE13-134E-4895-90E0-F3645ECFE4AB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings.Api", "Settings.Api\Hyperspan.Settings.Api.csproj", "{1DAD32B4-34A7-46F7-A3DF-FEB13E59AAE4}"
 EndProject
 Global
