@@ -1,9 +1,9 @@
-﻿using Auth.Domain.DatabaseModals;
+﻿using Hyperspan.Auth.Domain.DatabaseModals;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Auth.Domain.Context
+namespace Hyperspan.Auth.Domain.Context
 {
     /// <summary>
     /// An abstract class to register all the identity tables required.
@@ -40,32 +40,32 @@ namespace Auth.Domain.Context
             {
                 entity.ToTable("Roles", schema: "Account");
             });
-            
+
             builder.Entity<ApplicationUser<T>>(entity =>
             {
                 entity.ToTable("Users", schema: "Account");
             });
-            
+
             builder.Entity<IdentityUserClaim<T>>(entity =>
             {
                 entity.ToTable("UserClaims", schema: "Account");
             });
-            
+
             builder.Entity<IdentityRoleClaim<T>>(entity =>
             {
                 entity.ToTable("RoleClaims", schema: "Account");
             });
-            
+
             builder.Entity<IdentityUserRole<T>>(entity =>
             {
                 entity.ToTable("UserRoles", schema: "Account");
             });
-            
+
             builder.Entity<IdentityUserToken<T>>(entity =>
             {
                 entity.ToTable("UserTokens", schema: "Account");
             });
-            
+
             builder.Entity<IdentityUserLogin<T>>(entity =>
             {
                 entity.ToTable("UserLogins", schema: "Account");

@@ -1,12 +1,12 @@
-﻿using Auth.Domain.DatabaseModals;
-using Auth.Interfaces;
-using Auth.Shared.Requests;
-using Base.Shared;
-using Base.Shared.Modals;
+﻿using Hyperspan.Auth.Domain.DatabaseModals;
+using Hyperspan.Auth.Interfaces;
+using Hyperspan.Auth.Shared.Requests;
+using Hyperspan.Base.Shared;
+using Hyperspan.Base.Shared.Modals;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Auth.Services;
+namespace Hyperspan.Auth.Services;
 
 public abstract class RoleService<T> : IRoleService<T> where T : IEquatable<T>
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Base.Database.DbHelpers
+namespace Hyperspan.Base.Database.DbHelpers
 {
     public interface IRepository<TId, T, TContext>
         where TId : IEquatable<TId>

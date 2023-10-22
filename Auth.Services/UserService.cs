@@ -1,20 +1,20 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Auth.Domain.DatabaseModals;
-using Auth.Interfaces;
-using Auth.Shared.Enums;
-using Auth.Shared.Requests;
-using Auth.Shared.Responses;
-using Base.Shared;
-using Base.Shared.Config;
-using Base.Shared.Modals;
+using Hyperspan.Auth.Domain.DatabaseModals;
+using Hyperspan.Auth.Interfaces;
+using Hyperspan.Auth.Shared.Enums;
+using Hyperspan.Auth.Shared.Requests;
+using Hyperspan.Auth.Shared.Responses;
+using Hyperspan.Base.Shared;
+using Hyperspan.Base.Shared.Config;
+using Hyperspan.Base.Shared.Modals;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RamsonDevelopers.UtilEmail;
 
-namespace Auth.Services
+namespace Hyperspan.Auth.Services
 {
     public class UserService<T> : IUserService<T> where T :
                                   IEquatable<T>

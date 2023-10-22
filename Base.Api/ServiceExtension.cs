@@ -1,21 +1,23 @@
 ﻿using System.Net;
-using Auth.Domain.DatabaseModals;
-using Base.Shared.Config;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
-using Base.Database;
-using Base.Services;
-using Base.Shared.Modals;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using RamsonDevelopers.UtilEmail;
+using Hyperspan.Base.Shared.Config;
+using Hyperspan.Auth.Domain.DatabaseModals;
+using Hyperspan.Base.Shared.Modals;
+using Hyperspan.Base.Database;
+using Hyperspan.Base.Services;
+using Hyperspan.Settings.Api;
+using Hyperspan.Settings.Services;
 
-namespace Base.Api
+namespace Hyperspan.Base.Api
 {
     public static class ServiceExtension
     {
@@ -33,7 +35,7 @@ namespace Base.Api
             services.AddBaseServices(connectionStrings.PgDatabase);
             services.AddAppIdentity<Guid>();
             services.AddJwtAuthentication(appConfiguration.Get<AppConfiguration>());
-
+            services.AddSettingsApi();
             services.AddCors(cors =>
             {
                 cors.AddDefaultPolicy(policy =>
@@ -89,8 +91,8 @@ namespace Base.Api
 
                     bearer.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appConfig.JwtSecurityKey)),
                         ValidateIssuerSigningKey = true,
                         RoleClaimType = ClaimTypes.Role,

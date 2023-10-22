@@ -1,4 +1,4 @@
-﻿namespace Auth.Interfaces
+﻿namespace Hyperspan.Auth.Interfaces
 {
     public interface ICurrentUserService<T> where T : IEquatable<T>
     {

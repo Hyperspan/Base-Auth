@@ -1,8 +1,8 @@
-﻿using Base.Database;
-using Base.Services.Auth;
+﻿using Hyperspan.Base.Database;
+using Hyperspan.Base.Services.Auth;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Base.Services
+namespace Hyperspan.Base.Services
 {
     public static class ServiceExtensions
     {

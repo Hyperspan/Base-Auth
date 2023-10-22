@@ -1,4 +1,4 @@
-﻿namespace Base.Shared.Config
+﻿namespace Hyperspan.Base.Shared.Config
 {
     public class ConnectionString
     {

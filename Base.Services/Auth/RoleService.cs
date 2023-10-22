@@ -1,8 +1,8 @@
-﻿using Auth.Domain.DatabaseModals;
-using Auth.Services;
+﻿using Hyperspan.Auth.Domain.DatabaseModals;
+using Hyperspan.Auth.Services;
 using Microsoft.AspNetCore.Identity;
 
-namespace Base.Services.Auth
+namespace Hyperspan.Base.Services.Auth
 {
     public class RoleService : RoleService<Guid>, IRoleService
     {

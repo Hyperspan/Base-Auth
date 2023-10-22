@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Auth.Shared.Enums;
+using Hyperspan.Auth.Shared.Enums;
 
-namespace Auth.Shared.Responses;
+namespace Hyperspan.Auth.Shared.Responses;
 
 public class RegisterResponse
 {

@@ -1,5 +1,4 @@
-﻿
-namespace Base.Shared.Modals
+﻿namespace Hyperspan.Base.Shared.Modals
 {
     public class ApiResponseModal
     {

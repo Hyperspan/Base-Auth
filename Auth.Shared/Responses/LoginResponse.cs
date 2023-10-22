@@ -1,4 +1,4 @@
-﻿namespace Auth.Shared.Responses;
+﻿namespace Hyperspan.Auth.Shared.Responses;
 
 public class LoginResponse
 {

@@ -1,8 +1,8 @@
-﻿using Auth.Domain.DatabaseModals;
-using Auth.Shared.Requests;
-using Base.Shared.Modals;
+﻿using Hyperspan.Auth.Domain.DatabaseModals;
+using Hyperspan.Auth.Shared.Requests;
+using Hyperspan.Base.Shared.Modals;
 
-namespace Auth.Interfaces
+namespace Hyperspan.Auth.Interfaces
 {
     public interface IRoleService<T> where T : IEquatable<T>
     {

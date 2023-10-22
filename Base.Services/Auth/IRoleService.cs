@@ -1,6 +1,6 @@
-﻿using Auth.Interfaces;
+﻿using Hyperspan.Auth.Interfaces;
 
-namespace Base.Services.Auth
+namespace Hyperspan.Base.Services.Auth
 {
     public interface IRoleService : IRoleService<Guid>
     {

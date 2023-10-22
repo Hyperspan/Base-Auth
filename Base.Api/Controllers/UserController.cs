@@ -1,10 +1,10 @@
-﻿using Auth.Shared.Requests;
-using Auth.Shared.Responses;
-using Base.Services.Auth;
-using Base.Shared.Modals;
+﻿using Hyperspan.Auth.Shared.Requests;
+using Hyperspan.Auth.Shared.Responses;
+using Hyperspan.Base.Services.Auth;
+using Hyperspan.Base.Shared.Modals;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Base.Api.Controllers
+namespace Hyperspan.Base.Api.Controllers
 {
     [ApiController]
     [Route("api/account/user")]

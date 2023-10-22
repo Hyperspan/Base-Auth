@@ -1,8 +1,8 @@
-﻿using Auth.Shared.Enums;
-using Base.Shared.Config;
+﻿using Hyperspan.Auth.Shared.Enums;
+using Hyperspan.Base.Shared.Config;
 using Microsoft.AspNetCore.Identity;
 
-namespace Auth.Domain.DatabaseModals;
+namespace Hyperspan.Auth.Domain.DatabaseModals;
 
 public class ApplicationUser<T> : IdentityUser<T>, IBaseEntity<T> where T : IEquatable<T>
 {
