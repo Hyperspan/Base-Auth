@@ -2,22 +2,43 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageId>Hyperspan.Settings.Api</PackageId>
+		<Title>Hyperspan.Settings.Api</Title>
+		<Authors>Ayush Aher</Authors>
+		<Company>Ramson Developers</Company>
+		<PackageProjectUrl></PackageProjectUrl>
+		<PackageIcon>150px white-01.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/Hyperspan/Base-Auth</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>Base; Api; Auth; Identity;</PackageTags>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\150px white-01.png" Link="Logo-Img.png">
-			<PackagePath>\</PackagePath>
+		<Content Include="..\150px white-01.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\150px white-01.png">
 			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
 		</None>
-		<None Include="..\LICENSE.txt" Link="LICENSE.txt">
-			<PackagePath>\</PackagePath>
+		<None Include="..\LICENSE.txt">
 			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
 		</None>
-		<None Include="..\README.md" Link="README.md">
-			<PackagePath>\</PackagePath>
+		<None Include="..\README.md">
 			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
 
