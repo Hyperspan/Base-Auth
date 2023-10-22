@@ -11,7 +11,7 @@
 		<Authors>Ayush Aher</Authors>
 		<Company>Ramson Developers</Company>
 		<PackageProjectUrl></PackageProjectUrl>
-		<PackageIcon>Logo-Img.png</PackageIcon>
+		<PackageIcon>150px white-01.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/Hyperspan/Base-Auth</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
@@ -27,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\Hyperspan\Projects\Hyperspan-DomainConfig\DnsClientApp\src\assets\Images\Logo-Img.png">
+		<None Include="..\150px white-01.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
