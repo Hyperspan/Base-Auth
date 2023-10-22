@@ -25,23 +25,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Base.Database", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{7C2BA500-BECF-49D7-A047-29957DFF4595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Settings.Services", "Settings.Services\Hyperspan.Settings.Services.csproj", "{6D43305A-C4EC-4BDC-A3B0-56945399E9DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings.Services", "Settings.Services\Hyperspan.Settings.Services.csproj", "{6D43305A-C4EC-4BDC-A3B0-56945399E9DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Settings.Interfaces", "Settings.Interfaces\Hyperspan.Settings.Interfaces.csproj", "{70FD607F-8007-43E8-ABA3-3D221FF06E29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings.Interfaces", "Settings.Interfaces\Hyperspan.Settings.Interfaces.csproj", "{70FD607F-8007-43E8-ABA3-3D221FF06E29}"
 	ProjectSection(ProjectDependencies) = postProject
 		{076686CB-D277-421D-8C3C-2F23AD287ABE} = {076686CB-D277-421D-8C3C-2F23AD287ABE}
 		{7836644F-837D-4CCE-B026-0D6232F6538A} = {7836644F-837D-4CCE-B026-0D6232F6538A}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Settings.Domain", "Settings.Domain\Hyperspan.Settings.Domain.csproj", "{6D730072-FE51-412A-A84B-B7877C1AF90B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings.Domain", "Settings.Domain\Hyperspan.Settings.Domain.csproj", "{6D730072-FE51-412A-A84B-B7877C1AF90B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Settings.Shared", "Settings.Shared\Hyperspan.Settings.Shared.csproj", "{076686CB-D277-421D-8C3C-2F23AD287ABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings.Shared", "Settings.Shared\Hyperspan.Settings.Shared.csproj", "{076686CB-D277-421D-8C3C-2F23AD287ABE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Erp", "Erp", "{190DEE13-134E-4895-90E0-F3645ECFE4AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "..\Erp\Api\Api.csproj", "{1BEEED19-68E0-4B3E-9B68-4758D36C3F02}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Settings.Api", "Settings.Api\Hyperspan.Settings.Api.csproj", "{1DAD32B4-34A7-46F7-A3DF-FEB13E59AAE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings.Api", "Settings.Api\Hyperspan.Settings.Api.csproj", "{1DAD32B4-34A7-46F7-A3DF-FEB13E59AAE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,10 +95,6 @@ Global
 		{076686CB-D277-421D-8C3C-2F23AD287ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{076686CB-D277-421D-8C3C-2F23AD287ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{076686CB-D277-421D-8C3C-2F23AD287ABE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BEEED19-68E0-4B3E-9B68-4758D36C3F02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BEEED19-68E0-4B3E-9B68-4758D36C3F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BEEED19-68E0-4B3E-9B68-4758D36C3F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BEEED19-68E0-4B3E-9B68-4758D36C3F02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1DAD32B4-34A7-46F7-A3DF-FEB13E59AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1DAD32B4-34A7-46F7-A3DF-FEB13E59AAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DAD32B4-34A7-46F7-A3DF-FEB13E59AAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -122,7 +116,6 @@ Global
 		{70FD607F-8007-43E8-ABA3-3D221FF06E29} = {7C2BA500-BECF-49D7-A047-29957DFF4595}
 		{6D730072-FE51-412A-A84B-B7877C1AF90B} = {7C2BA500-BECF-49D7-A047-29957DFF4595}
 		{076686CB-D277-421D-8C3C-2F23AD287ABE} = {7C2BA500-BECF-49D7-A047-29957DFF4595}
-		{1BEEED19-68E0-4B3E-9B68-4758D36C3F02} = {190DEE13-134E-4895-90E0-F3645ECFE4AB}
 		{1DAD32B4-34A7-46F7-A3DF-FEB13E59AAE4} = {7C2BA500-BECF-49D7-A047-29957DFF4595}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
