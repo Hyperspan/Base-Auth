@@ -1,5 +1,7 @@
-﻿using Hyperspan.Base.Shared.Config;
+﻿using Hyperspan.Base.Shared;
+using Hyperspan.Base.Shared.Config;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Hyperspan.Base.Database.DbHelpers
@@ -51,54 +53,104 @@ namespace Hyperspan.Base.Database.DbHelpers
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await _dbContext
-                .Set<T>()
-                .ToListAsync();
+            try
+            {
+                return await _dbContext
+                    .Set<T>()
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw new ApiErrorException(BaseErrorCodes.QueryFailed, e);
+            }
+
         }
 
         public async Task<List<T>> GetAllAsync(string sqlQuery)
         {
-            return await _dbContext
-                .Set<T>()
-                .FromSqlRaw(sqlQuery)
-                .AsNoTracking()
-                .ToListAsync();
+            try
+            {
+
+                return await _dbContext
+                    .Set<T>()
+                    .FromSqlRaw(sqlQuery)
+                    .AsNoTracking()
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw new ApiErrorException(BaseErrorCodes.QueryFailed, e);
+            }
         }
 
         public async Task<T> AddAsync(T entity)
         {
-            //entity.IsDeleted = false;
-            //entity.LastModifiedOn = DateTime.Now;
-            //entity.CreatedOn = DateTime.Now;
-            //entity.CreatedBy = _currentUserService.UserId;
-            //entity.IsActive = true;
-
-            await _dbContext.Set<T>().AddAsync(entity);
-            return entity;
+            try
+            {
+                entity.CreatedOn = DateTime.UtcNow;
+                await _dbContext.Set<T>().AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception e)
+            {
+                throw new ApiErrorException(BaseErrorCodes.InsertFailed, e);
+            }
         }
 
-        public Task<bool> AddRangeAsync(List<T> entities)
+        public async Task<bool> AddRangeAsync(List<T> entities)
         {
-            _dbContext.Set<T>().AddRangeAsync(entities);
-            return Task.FromResult(true);
+            try
+            {
+
+                entities.ForEach(x =>
+                {
+                    x.CreatedOn = DateTime.UtcNow;
+                });
+
+                await _dbContext.Set<T>().AddRangeAsync(entities);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new ApiErrorException(BaseErrorCodes.InsertFailed, e);
+            }
         }
 
-        public Task<bool> UpdateAsync(T entity)
+        public async Task<bool> UpdateAsync(T entity)
         {
-            var exist = _dbContext.Set<T>().Find(entity.Id);
-            //entity.LastModifiedOn = DateTime.Now;
-            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
-            return Task.FromResult(true);
+            try
+            {
+                var exist = _dbContext.Set<T>().Find(entity.Id);
+                if (exist == null) return false;
+
+                entity.LastModifiedOn = DateTime.UtcNow;
+                _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new ApiErrorException(BaseErrorCodes.UpdateFailed, e);
+            }
         }
 
-        public Task<bool> DeleteAsync(T entity)
+        public async Task<bool> DeleteAsync(T entity)
         {
-            var exist = _dbContext.Set<T>().Find(entity.Id);
-            //entity.IsDeleted = true;
-            //entity.LastModifiedOn = DateTime.Now;
-            //entity.IsActive = false;
-            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
-            return Task.FromResult(true);
+            try
+            {
+                var exist = _dbContext.Set<T>().Find(entity.Id);
+                if (exist == null) return false;
+
+                _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new ApiErrorException(BaseErrorCodes.DeleteFailed, e);
+            }
         }
 
     }

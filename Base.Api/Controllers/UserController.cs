@@ -20,15 +20,15 @@ namespace Hyperspan.Base.Api.Controllers
         public async Task<ApiResponseModal<RegisterResponse>> RegisterUserAsync(RegisterUserRequest request)
             => await _userService.RegisterUser(request);
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<ApiResponseModal<LoginResponse>> LoginUserAsync(LoginUserRequest request)
             => await _userService.UserLogin(request);
 
-        [HttpPost("ChangePassword")]
+        [HttpPost("change-password")]
         public async Task<ApiResponseModal> ChangePassword(object userDetails)
             => await _userService.ChangePassword(userDetails);
 
-        [HttpPost("ForgetPassword")]
+        [HttpPost("forget-password")]
         public async Task<ApiResponseModal> ForgetPassword(object userDetails)
             => await _userService.ForgetPassword(userDetails);
 

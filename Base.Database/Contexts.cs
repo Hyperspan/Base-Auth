@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hyperspan.Base.Database
 {
-    public class Contexts : AuthContext<Guid>
+    public abstract class Contexts : AuthContext<Guid>
     {
-        public Contexts(DbContextOptions options)
+        protected Contexts(DbContextOptions options)
             : base(options)
         {
         }

@@ -6,10 +6,10 @@ namespace Hyperspan.Base.Shared
     {
         public BaseErrorCodes()
         {
-            ErrorMessages = _errorMessages;
+            ErrorMessages = _baseErrorMessages;
         }
 
-        protected internal IDictionary<string, string> _errorMessages = new Dictionary<string, string>()
+        protected internal IDictionary<string, string> _baseErrorMessages = new Dictionary<string, string>
         {
             #region 00 System
 
@@ -32,6 +32,7 @@ namespace Hyperspan.Base.Shared
 
             #region 02 Database
             { NullConnectionString, "The connection string passed was null." },
+            { NullConnectionString, "The connection string passed was null." },
             #endregion
 
             #region 03 Settings
@@ -39,7 +40,7 @@ namespace Hyperspan.Base.Shared
             #endregion
         };
 
-        public IDictionary<string, string> ErrorMessages { get; }
+        public IDictionary<string, string> ErrorMessages { get; protected set; }
 
 
         #region 00 System
@@ -64,6 +65,10 @@ namespace Hyperspan.Base.Shared
         #region 02 Database
 
         public const string NullConnectionString = "02DB001";
+        public const string InsertFailed = "02DB002";
+        public const string UpdateFailed = "02DB003";
+        public const string DeleteFailed = "02DB004";
+        public const string QueryFailed = "02DB005";
 
         #endregion
 

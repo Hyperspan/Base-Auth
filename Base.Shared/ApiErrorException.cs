@@ -16,5 +16,11 @@
             ErrorCode = errorCode;
         }
 
+        public ApiErrorException(string errorCode, Exception innerException)
+            : base(errorCode, innerException)
+        {
+            ErrorCode = errorCode;
+        }
+
     }
 }

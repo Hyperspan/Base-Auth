@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -10,9 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using RamsonDevelopers.UtilEmail;
 using Hyperspan.Base.Shared.Config;
-using Hyperspan.Auth.Domain.DatabaseModals;
 using Hyperspan.Base.Shared.Modals;
-using Hyperspan.Base.Database;
 using Hyperspan.Base.Services;
 using Hyperspan.Settings.Api;
 
@@ -25,13 +22,12 @@ namespace Hyperspan.Base.Api
             var appConfiguration = config.GetSection(AppConfiguration.Label);
             var emailConfig = config.GetSection(EmailConfig.SectionLabel);
 
-
             services.AddOptions();
+            services.AddControllers();
             services.Configure<AppConfiguration>(appConfiguration);
             services.Configure<EmailConfig>(emailConfig);
             services.AddEmailService();
             services.AddBaseServices();
-            services.AddAppIdentity<Guid>();
             services.AddJwtAuthentication(appConfiguration.Get<AppConfiguration>());
             services.AddSettingsApi();
             services.AddCors(cors =>
@@ -47,31 +43,7 @@ namespace Hyperspan.Base.Api
             return services;
         }
 
-
-        /// <summary>
-        /// Add the identity Services to help in using the ASP net Identity.
-        /// </summary>
-        /// <param name="serviceCollection"></param>
-        /// <returns></returns>
-        internal static IServiceCollection AddAppIdentity<T>(
-                                        this IServiceCollection serviceCollection) where T : IEquatable<T>
-        {
-            serviceCollection
-                .AddIdentity<ApplicationUser<T>, ApplicationRole<T>>(options =>
-                {
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.User.RequireUniqueEmail = true;
-                })
-                .AddRoles<ApplicationRole<T>>()
-                .AddEntityFrameworkStores<Contexts>()
-                .AddDefaultTokenProviders();
-
-            return serviceCollection;
-        }
-
+        
         internal static IServiceCollection AddJwtAuthentication(
             this IServiceCollection serviceCollection,
             AppConfiguration appConfig)

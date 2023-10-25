@@ -12,11 +12,11 @@ namespace Hyperspan.Settings.Services
     public class SettingsService : ISettingService
     {
         private readonly IRepository<Guid, SettingsMaster, Contexts> _repository;
-        private readonly IUnitOfWork<SettingsMaster, Guid, Contexts> _unitOfWork;
+        private readonly IUnitOfWork<Guid, SettingsMaster, Contexts> _unitOfWork;
 
         public SettingsService(
             IRepository<Guid, SettingsMaster, Contexts> repository,
-            IUnitOfWork<SettingsMaster, Guid, Contexts> unitOfWork
+            IUnitOfWork<Guid, SettingsMaster, Contexts> unitOfWork
         )
         {
             _repository = repository;

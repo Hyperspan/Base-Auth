@@ -17,8 +17,6 @@ namespace Hyperspan.Settings.Domain
             Guid? parentId = null)
         {
             Id = Guid.NewGuid();
-            Timestamp = DateTime.UtcNow;
-
             SettingLabel = settingLabel;
             SettingValue = settingValue;
             DefaultSettingValue = defaultSettingValue;

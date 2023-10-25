@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using Hyperspan.Base.Shared.Modals;
+﻿using Hyperspan.Base.Shared.Modals;
 using Hyperspan.Settings.Interfaces;
 using Hyperspan.Settings.Shared.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hyperspan.Settings.Api.Controllers
 {
     [ApiController]
-    [Route("api/settings`")]
+    [Route("api/settings")]
     public class SettingsController : ControllerBase
     {
         private readonly ISettingService _settingService;
@@ -16,7 +15,7 @@ namespace Hyperspan.Settings.Api.Controllers
         public virtual async Task<ApiResponseModal> GetSettingValueAsync(Guid id)
             => await _settingService.GetSettingValue(id);
 
-        [HttpGet("/get-settings-by-section/{label:string}")]
+        [HttpGet("/get-settings-by-section/{label}")]
         public virtual async Task<ApiResponseModal> GetSettingValueAsync(string label)
             => await _settingService.GetSettingValue(label);
 

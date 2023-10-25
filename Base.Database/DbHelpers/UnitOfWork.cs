@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace Hyperspan.Base.Database.DbHelpers
 {
-    public class UnitOfWork<T, TId, TContext> : IUnitOfWork<T, TId, TContext>
+    public class UnitOfWork<TId, T, TContext> : IUnitOfWork<TId, T, TContext>
         where TId : IEquatable<TId>
         where T : class
         where TContext : DbContext
