@@ -1,4 +1,5 @@
-﻿#pragma warning disable CS1591
+﻿// ReSharper disable InconsistentNaming
+#pragma warning disable CS1591
 
 
 namespace Hyperspan.Shared
@@ -33,7 +34,12 @@ namespace Hyperspan.Shared
 
             #region 02 Database
             { NullConnectionString, "The connection string passed was null." },
-            { NullConnectionString, "The connection string passed was null." },
+            { InsertFailed , "Failed to Insert into database." },
+            { UpdateFailed , "Failed to Update into database." },
+            { DeleteFailed , "Failed to Delete from database." },
+            { QueryFailed , "Failed to Query into database." },
+            { InvalidId, "The Id passed is invalid." },
+            { RecordNotFound, "Record was not found." },
             #endregion
 
             #region 03 Settings
@@ -70,6 +76,9 @@ namespace Hyperspan.Shared
         public const string UpdateFailed = "02DB003";
         public const string DeleteFailed = "02DB004";
         public const string QueryFailed = "02DB005";
+        public const string InvalidId = "02DB006";
+        public const string RecordNotFound = "02DB007";
+
 
         #endregion
 

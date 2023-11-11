@@ -24,10 +24,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="..\150px white-01.png" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="..\150px white-01.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
