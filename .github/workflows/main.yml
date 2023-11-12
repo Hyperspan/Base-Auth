@@ -4,21 +4,21 @@ on:
   push:
     branches:
       - master
+      - GH-Management
+      - Dev
 jobs:
   build:
-    runs-on: ubuntu-latest
-    
+    runs-on: self-hosted
     steps:
+    - name: Secreate
+      run: echo ${{ secrets.NUGET_API_KEY }}
+
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6  # Specify the .NET Core version you need
-
     - name: Build
-      run: dotnet build --configuration Release
+      run: pwd && dotnet build --configuration Release
 
     - name: Test
       run: dotnet test
+    
