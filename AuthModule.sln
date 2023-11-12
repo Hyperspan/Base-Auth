@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Auth", "Hyperspan.Auth\Hyperspan.Auth.csproj", "{40ED740E-E09F-43DB-AD92-921DC50F80AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Auth", "Hyperspan.Auth\Hyperspan.Auth.csproj", "{40ED740E-E09F-43DB-AD92-921DC50F80AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Base", "Hyperspan.Base\Hyperspan.Base.csproj", "{22273022-5147-4449-B061-06F4C60E494C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Base", "Hyperspan.Base\Hyperspan.Base.csproj", "{22273022-5147-4449-B061-06F4C60E494C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Shared", "Hyperspan.Shared\Hyperspan.Shared.csproj", "{62678F31-E309-47E5-A098-BE9B0DAF4FBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Shared", "Hyperspan.Shared\Hyperspan.Shared.csproj", "{62678F31-E309-47E5-A098-BE9B0DAF4FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Settings", "Hyperspan.Settings\Hyperspan.Settings.csproj", "{E519160E-8DCF-4544-AA7D-D2E9D346E5BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperspan.Settings", "Hyperspan.Settings\Hyperspan.Settings.csproj", "{E519160E-8DCF-4544-AA7D-D2E9D346E5BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperspan.Settings.Test", "Hyperspan.Settings.Test\Hyperspan.Settings.Test.csproj", "{038FA8A6-3FF5-40F3-ADEE-A1C5C17A4C24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E519160E-8DCF-4544-AA7D-D2E9D346E5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E519160E-8DCF-4544-AA7D-D2E9D346E5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E519160E-8DCF-4544-AA7D-D2E9D346E5BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{038FA8A6-3FF5-40F3-ADEE-A1C5C17A4C24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{038FA8A6-3FF5-40F3-ADEE-A1C5C17A4C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{038FA8A6-3FF5-40F3-ADEE-A1C5C17A4C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{038FA8A6-3FF5-40F3-ADEE-A1C5C17A4C24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
