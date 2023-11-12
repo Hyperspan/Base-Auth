@@ -7,14 +7,20 @@ on:
       - Dev
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     
     steps:
+    - name: Secreate
+      run: echo ${{ secrets.NUGET_API_KEY }}
+
     - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Build
-      run: dotnet build --configuration Release
+      run: pwd && dotnet build --configuration Release
 
     - name: Test
       run: dotnet test
+    
+
+    
