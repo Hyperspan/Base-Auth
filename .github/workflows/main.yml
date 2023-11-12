@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Secreate
       run: echo ${{ secrets.NUGET_API_KEY }}
