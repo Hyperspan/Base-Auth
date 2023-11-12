@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - master
-      - GH-Management
       - Dev
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+
     steps:
     - name: Secreate
       run: echo ${{ secrets.NUGET_API_KEY }}
@@ -21,4 +21,6 @@ jobs:
 
     - name: Test
       run: dotnet test
+    
+
     
