@@ -1,6 +1,8 @@
-﻿using Hyperspan.Base.Domain.DbHelpers;
+﻿using System.Text.RegularExpressions;
+using Hyperspan.Base.Domain.DbHelpers;
 using Hyperspan.Settings.Domain;
 using Hyperspan.Settings.Interfaces;
+using Hyperspan.Settings.Shared.Modals;
 using Hyperspan.Settings.Shared.Requests;
 using Hyperspan.Settings.Shared.Responses;
 using Hyperspan.Shared;
@@ -16,8 +18,7 @@ namespace Hyperspan.Settings.Services
 
         public SettingsService(
             IRepository<Guid, SettingsMaster, DbContext> repository,
-            IUnitOfWork<Guid, SettingsMaster, DbContext> unitOfWork
-        )
+            IUnitOfWork<Guid, SettingsMaster, DbContext> unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
@@ -77,8 +78,17 @@ namespace Hyperspan.Settings.Services
             var transaction = await _unitOfWork.StartTransaction();
             try
             {
+                if (request.Type == SettingsType.None)
+                    throw new ApiErrorException(BaseErrorCodes.SettingTypeInvalid);
+
                 var settingRecord = await _repository.GetById(request.Id)
                                     ?? throw new ApiErrorException(BaseErrorCodes.SettingNotFound);
+
+                if (request.Type == SettingsType.Code)
+                {
+                    request.Value = ParseCodeGenerationSettingsValue(request.Value);
+                }
+
                 settingRecord.UpdateSettings(request.Value);
 
                 await _repository.UpdateAsync(settingRecord);
@@ -91,16 +101,15 @@ namespace Hyperspan.Settings.Services
 
                 return await ApiResponseModal<SettingResponse>.SuccessAsync(settingResponse);
             }
-            catch
+            catch (Exception ex)
             {
                 await transaction.RollbackAsync();
+                return await ApiResponseModal<SettingResponse>.FatalAsync(ex);
             }
             finally
             {
                 await transaction.DisposeAsync();
             }
-
-            return null;
         }
 
         public virtual async Task<ApiResponseModal<SettingResponse>> ResetValue(Guid id)
@@ -123,16 +132,52 @@ namespace Hyperspan.Settings.Services
 
                 return await ApiResponseModal<SettingResponse>.SuccessAsync(settingResponse);
             }
-            catch
+            catch (Exception ex)
             {
                 await transaction.RollbackAsync();
+                return await ApiResponseModal<SettingResponse>.FatalAsync(ex);
             }
             finally
             {
                 await transaction.DisposeAsync();
             }
-
-            return null;
         }
+
+        public virtual string ParseCodeGenerationSettingsValue(string settingValue)
+        {
+            var regex = new Regex(@"\{([^}]+)\}");
+            var variablesList = regex.Matches(settingValue);
+
+            var value = settingValue;
+            var componentTypes = typeof(ComponentType);
+
+            foreach (Match item in variablesList)
+            {
+                var componentType = componentTypes.GetEnumNames()
+                    .FirstOrDefault(x => string.Equals(x, item.Groups[1].Value,
+                        StringComparison.CurrentCultureIgnoreCase));
+
+                value = componentType switch
+                {
+                    nameof(ComponentType.Date_2DYear) => value.Replace($@"{{{componentType}}}",
+                        DateTime.UtcNow.ToString("yy")),
+
+                    nameof(ComponentType.Date_4DYear) => value.Replace($@"{{{componentType}}}",
+                        DateTime.UtcNow.ToString("yyyy")),
+
+                    nameof(ComponentType.Time_HHMM) => value.Replace($@"{{{componentType}}}",
+                        DateTime.UtcNow.ToString("HH:mm")),
+
+                    nameof(ComponentType.Time_HHMMSS) => value.Replace($@"{{{componentType}}}",
+                        DateTime.UtcNow.ToString("HH:mm:ss")),
+
+                    _ => throw new ApiErrorException(BaseErrorCodes.SettingTypeInvalid,
+                        $"No component '{componentType}' was recognized by system.")
+                };
+            }
+
+            return value;
+        }
+
     }
 }
