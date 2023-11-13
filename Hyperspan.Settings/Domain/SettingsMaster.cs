@@ -38,11 +38,13 @@ namespace Hyperspan.Settings.Domain
         public SettingsMaster? Parent { get; set; }
 
 
-        public static string GetByLabelQuery(string label) =>
+        public static string GetByLabelQuery(string label, Guid? parentId = null) =>
             @$"
-            SELECT * FROM ""Settings"".""{nameof(SettingsMaster)}""
-                WHERE ""{nameof(SettingLabel)}"" = '{label}';
-        ";
+                SELECT * FROM ""Settings"".""{nameof(SettingsMaster)}""
+                    WHERE ""{nameof(SettingLabel)}"" = '{label}' 
+                        {(parentId.HasValue && parentId.Value != Guid.Empty ?
+                                $@"AND ""{nameof(ParentId)}"" = '{parentId}'" : "")};
+            ";
 
         public void UpdateSettings(string value)
         {

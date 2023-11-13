@@ -28,8 +28,8 @@ namespace Hyperspan.Settings.Test
             var unitOfWork = new Mock<IUnitOfWork<Guid, SettingsMaster, DbContext>>();
 
             ISettingService service = new SettingsService(repository.Object, unitOfWork.Object);
-            var result1 = await service.ParseCodeGenerationSettingsValue(testValueString1);
-            var result2 = await service.ParseCodeGenerationSettingsValue(testValueString2);
+            var result1 = service.ParseCodeGenerationSettingsValue(testValueString1);
+            var result2 = service.ParseCodeGenerationSettingsValue(testValueString2);
 
             Assert.AreEqual(expectedResult1, result1);
             Assert.AreEqual(expectedResult2, result2);

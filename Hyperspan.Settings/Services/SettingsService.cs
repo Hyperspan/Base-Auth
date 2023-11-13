@@ -86,7 +86,7 @@ namespace Hyperspan.Settings.Services
 
                 if (request.Type == SettingsType.Code)
                 {
-                    request.Value = await ParseCodeGenerationSettingsValue(request.Value);
+                    request.Value = ParseCodeGenerationSettingsValue(request.Value);
                 }
 
                 settingRecord.UpdateSettings(request.Value);
@@ -143,7 +143,7 @@ namespace Hyperspan.Settings.Services
             }
         }
 
-        public virtual async Task<string> ParseCodeGenerationSettingsValue(string settingValue)
+        public virtual string ParseCodeGenerationSettingsValue(string settingValue)
         {
             var regex = new Regex(@"\{([^}]+)\}");
             var variablesList = regex.Matches(settingValue);
@@ -151,37 +151,29 @@ namespace Hyperspan.Settings.Services
             var value = settingValue;
             var componentTypes = typeof(ComponentType);
 
-            var moduleIteration = 0;
-            var fieldIteration = 0;
-
             foreach (Match item in variablesList)
             {
                 var componentType = componentTypes.GetEnumNames()
                     .FirstOrDefault(x => string.Equals(x, item.Groups[1].Value,
                         StringComparison.CurrentCultureIgnoreCase));
 
-                switch (componentType)
+                value = componentType switch
                 {
-                    case nameof(ComponentType.Date_2DYear):
-                        value = value.Replace($@"{{{componentType}}}", DateTime.UtcNow.ToString("yy"));
-                        break;
+                    nameof(ComponentType.Date_2DYear) => value.Replace($@"{{{componentType}}}",
+                        DateTime.UtcNow.ToString("yy")),
 
-                    case nameof(ComponentType.Date_4DYear):
-                        value = value.Replace($@"{{{componentType}}}", DateTime.UtcNow.ToString("yyyy"));
-                        break;
+                    nameof(ComponentType.Date_4DYear) => value.Replace($@"{{{componentType}}}",
+                        DateTime.UtcNow.ToString("yyyy")),
 
-                    case nameof(ComponentType.Time_HHMM):
-                        value = value.Replace($@"{{{componentType}}}", DateTime.UtcNow.ToString("HH:mm"));
-                        break;
+                    nameof(ComponentType.Time_HHMM) => value.Replace($@"{{{componentType}}}",
+                        DateTime.UtcNow.ToString("HH:mm")),
 
-                    case nameof(ComponentType.Time_HHMMSS):
-                        value = value.Replace($@"{{{componentType}}}", DateTime.UtcNow.ToString("HH:mm:ss"));
-                        break;
+                    nameof(ComponentType.Time_HHMMSS) => value.Replace($@"{{{componentType}}}",
+                        DateTime.UtcNow.ToString("HH:mm:ss")),
 
-                    default:
-                        throw new ApiErrorException(BaseErrorCodes.SettingTypeInvalid,
-                            $"No component '{componentType}' was recognized by system.");
-                }
+                    _ => throw new ApiErrorException(BaseErrorCodes.SettingTypeInvalid,
+                        $"No component '{componentType}' was recognized by system.")
+                };
             }
 
             return value;
