@@ -1,4 +1,5 @@
-﻿using Hyperspan.Settings.Shared.Requests;
+﻿using Hyperspan.Settings.Domain;
+using Hyperspan.Settings.Shared.Requests;
 using Hyperspan.Settings.Shared.Responses;
 using Hyperspan.Shared.Modals;
 
@@ -10,5 +11,6 @@ namespace Hyperspan.Settings.Interfaces
         Task<ApiResponseModal<SettingResponse>> GetSettingValue(string sectionLabel);
         Task<ApiResponseModal<SettingResponse>> UpdateSettingValue(UpdateSettingRequest request);
         Task<ApiResponseModal<SettingResponse>> ResetValue(Guid id);
+        string ParseCodeGenerationSettingsValue(string settingValue);
     }
 }

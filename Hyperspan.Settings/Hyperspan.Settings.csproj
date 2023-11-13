@@ -2,16 +2,49 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageId>Hyperspan.Settings</PackageId>
+		<Title>Hyperspan.Settings</Title>
+		<Authors>Ayush Aher</Authors>
+		<Company>Ramson Developers</Company>
+		<PackageProjectUrl></PackageProjectUrl>
+		<PackageIcon>150px white-01.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/Hyperspan/Base-Auth</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>Api; Settings; Hyperspan;</PackageTags>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
+
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.23" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Hyperspan.Base\Hyperspan.Base.csproj" />
-	  <ProjectReference Include="..\Hyperspan.Shared\Hyperspan.Shared.csproj" />
+		<ProjectReference Include="..\Hyperspan.Base\Hyperspan.Base.csproj" />
+		<ProjectReference Include="..\Hyperspan.Shared\Hyperspan.Shared.csproj" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+		<None Include="..\150px white-01.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 </Project>

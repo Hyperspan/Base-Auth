@@ -19,9 +19,11 @@ namespace Hyperspan.Shared
             { NotImplemented, "Method not implemented" },
             { ArgumentNull, "The argument passed was null." },
             { NullValue, "The value is null" },
+
             #endregion
 
             #region 01 Auth
+
             { EmailTaken, "This email address is already taken" },
             { PasswordNotStrong, "Password is not strong enough. Please try another password." },
             { IncorrectCredentials, "Credentials provided are not correct." },
@@ -30,20 +32,28 @@ namespace Hyperspan.Shared
             { MobileNotVerified, "Mobile No. is not verified." },
             { RoleExists, "The Role already exists in the database." },
             { IdentityError, "Something went wrong. While processing the request." },
+
             #endregion
 
             #region 02 Database
+
             { NullConnectionString, "The connection string passed was null." },
-            { InsertFailed , "Failed to Insert into database." },
-            { UpdateFailed , "Failed to Update into database." },
-            { DeleteFailed , "Failed to Delete from database." },
-            { QueryFailed , "Failed to Query into database." },
+            { InsertFailed, "Failed to Insert into database." },
+            { UpdateFailed, "Failed to Update into database." },
+            { DeleteFailed, "Failed to Delete from database." },
+            { QueryFailed, "Failed to Query into database." },
             { InvalidId, "The Id passed is invalid." },
             { RecordNotFound, "Record was not found." },
+
             #endregion
 
             #region 03 Settings
-            { SettingNotFound, "The setting requested does not exists." }
+
+            { SettingNotFound, "The setting requested does not exists." },
+            { SettingTypeInvalid, "The setting type is invalid." },
+            { ModulesNotPassed, "No Module details found in request." },
+            { FieldsNotPassed, "No Field details found in request." },
+
             #endregion
         };
 
@@ -86,6 +96,9 @@ namespace Hyperspan.Shared
         #region 03 Settings
 
         public const string SettingNotFound = "03SET001";
+        public const string SettingTypeInvalid = "03SET002";
+        public const string ModulesNotPassed = "03SET003";
+        public const string FieldsNotPassed = "03SET004";
 
         #endregion
 
