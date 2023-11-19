@@ -35,26 +35,26 @@ jobs:
       - name: "Build AUTH project"
         run: dotnet build ${{ env.AUTH_PROJECT_PATH }} --configuration Release
 
-      # - name: "Build BASE project"
-      #   run: dotnet build ${{ env.BASE_PROJECT_PATH }} --configuration Release
+      - name: "Build BASE project"
+        run: dotnet build ${{ env.BASE_PROJECT_PATH }} --configuration Release
 
-      # - name: "Build SHARED project"
-      #   run: dotnet build ${{ env.SHARED_PROJECT_PATH }} --configuration Release
+      - name: "Build SHARED project"
+        run: dotnet build ${{ env.SHARED_PROJECT_PATH }} --configuration Release
 
       - name: "Pack AUTH project"
         run: dotnet pack ${{ env.AUTH_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.AUTH_PACKAGE_OUTPUT_DIRECTORY }}
 
-      # - name: "Pack BASE project"
-      #   run: dotnet pack ${{ env.BASE_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.BASE_PACKAGE_OUTPUT_DIRECTORY }}
+      - name: "Pack BASE project"
+        run: dotnet pack ${{ env.BASE_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.BASE_PACKAGE_OUTPUT_DIRECTORY }}
 
-      # - name: "Pack SHARED project"
-      #   run: dotnet pack ${{ env.SHARED_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}
+      - name: "Pack SHARED project"
+        run: dotnet pack ${{ env.SHARED_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}
 
       - name: "Push AUTH package"
         run: dotnet nuget push ${{ env.AUTH_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg  -k ${{ secrets.NUGET_AUTH_TOKEN  }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
-      # - name: "Push BASE package"
-      #   run: dotnet nuget push ${{ env.BASE_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg  -s https://api.nuget.org/v3/index.json --skip-duplicate -k ${{ secrets.NUGET_AUTH_TOKEN }}
+      - name: "Push BASE package"
+        run: dotnet nuget push ${{ env.BASE_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg  -k ${{ secrets.NUGET_AUTH_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
-      # - name: "Push SHARED package"
-      #   run: dotnet nuget push ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg  -s https://api.nuget.org/v3/index.json --skip-duplicate -k ${{ secrets.NUGET_AUTH_TOKEN }}
+      - name: "Push SHARED package"
+        run: dotnet nuget push ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg  -k ${{ secrets.NUGET_AUTH_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
