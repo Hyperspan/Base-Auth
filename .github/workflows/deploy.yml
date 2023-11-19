@@ -10,9 +10,9 @@ env:
   BASE_PROJECT_PATH: "Hyperspan.Base/Hyperspan.Base.csproj"
   SHARED_PROJECT_PATH: "Hyperspan.Shared/Hyperspan.Shared.csproj"
 
-  AUTH_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\AUTH_OUTPUT
-  BASE_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\BASE_OUTPUT
-  SHARED_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\SHARED_OUTPUT
+  AUTH_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/AUTH_OUTPUT
+  BASE_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/BASE_OUTPUT
+  SHARED_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/SHARED_OUTPUT
   NUGET_SOURCE_URL: "https://api.nuget.org/v3/index.json"
 
 jobs:
