@@ -32,14 +32,14 @@ jobs:
         with:
           dotnet-version: 6
 
-      - name: "Build AUTH project"
-        run: dotnet build ${{ env.AUTH_PROJECT_PATH }} --configuration Release
+      # - name: "Build AUTH project"
+      #   run: dotnet build ${{ env.AUTH_PROJECT_PATH }} --configuration Release
 
-      - name: "Build BASE project"
-        run: dotnet build ${{ env.BASE_PROJECT_PATH }} --configuration Release
+      # - name: "Build BASE project"
+      #   run: dotnet build ${{ env.BASE_PROJECT_PATH }} --configuration Release
 
-      - name: "Build SHARED project"
-        run: dotnet build ${{ env.SHARED_PROJECT_PATH }} --configuration Release
+      # - name: "Build SHARED project"
+      #   run: dotnet build ${{ env.SHARED_PROJECT_PATH }} --configuration Release
 
       - name: "Pack AUTH project"
         run: dotnet pack ${{ env.AUTH_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.AUTH_PACKAGE_OUTPUT_DIRECTORY }}
@@ -51,10 +51,10 @@ jobs:
         run: dotnet pack ${{ env.SHARED_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}
 
       - name: "Push AUTH package"
-        run: dotnet nuget push ${{ env.AUTH_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg -k ${{ secrets.NUGET_API_KEYF  }} --source ${{ env.NUGET_SOURCE_URL }} --skip-duplicate
+        run: dotnet nuget push ${{ env.AUTH_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg  -s https://api.nuget.org/v3/index.json --skip-duplicate -k ${{ secrets.NUGET_API_KEYF  }}
 
       - name: "Push BASE package"
-        run: dotnet nuget push ${{ env.BASE_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg -k ${{ secrets.NUGET_API_KEY }} --source ${{ env.NUGET_SOURCE_URL }} --skip-duplicate
+        run: dotnet nuget push ${{ env.BASE_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg  -s https://api.nuget.org/v3/index.json --skip-duplicate -k ${{ secrets.NUGET_API_KEY }}
 
       - name: "Push SHARED package"
-        run: dotnet nuget push ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg -k ${{ secrets.NUGET_API_KEY }} --source ${{ env.NUGET_SOURCE_URL }} --skip-duplicate
+        run: dotnet nuget push ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg  -s https://api.nuget.org/v3/index.json --skip-duplicate -k ${{ secrets.NUGET_API_KEY }}
