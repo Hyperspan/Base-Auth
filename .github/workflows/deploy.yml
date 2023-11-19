@@ -1,0 +1,60 @@
+name: Deploy to NuGet
+
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  AUTH_PROJECT_PATH: "Hyperspan.Auth/Hyperspan.Auth.csproj"
+  BASE_PROJECT_PATH: "Hyperspan.Base/Hyperspan.Base.csproj"
+  SHARED_PROJECT_PATH: "Hyperspan.Shared/Hyperspan.Shared.csproj"
+
+  AUTH_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\AUTH_OUTPUT
+  BASE_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\BASE_OUTPUT
+  SHARED_PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\SHARED_OUTPUT
+  NUGET_SOURCE_URL: "https://api.nuget.org/v3/index.json"
+
+jobs:
+  deploy:
+    name: "Deploy"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Get Version"
+        id: version
+        uses: battila7/get-version-action@v2.2.1
+
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6
+
+      - name: "Build AUTH project"
+        run: dotnet build ${{ env.AUTH_PROJECT_PATH }} --configuration Release
+
+      - name: "Build BASE project"
+        run: dotnet build ${{ env.BASE_PROJECT_PATH }} --configuration Release
+
+      - name: "Build SHARED project"
+        run: dotnet build ${{ env.SHARED_PROJECT_PATH }} --configuration Release
+
+      - name: "Pack AUTH project"
+        run: dotnet pack ${{ env.AUTH_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.AUTH_PACKAGE_OUTPUT_DIRECTORY }}
+
+      - name: "Pack BASE project"
+        run: dotnet pack ${{ env.BASE_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.BASE_PACKAGE_OUTPUT_DIRECTORY }}
+
+      - name: "Pack SHARED project"
+        run: dotnet pack ${{ env.SHARED_PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}
+
+      - name: "Push AUTH package"
+        run: dotnet nuget push ${{ env.AUTH_PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.NUGET_API_KEYF  }} -s ${{ env.NUGET_SOURCE_URL }}
+
+      - name: "Push BASE package"
+        run: dotnet nuget push ${{ env.BASE_PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s ${{ env.NUGET_SOURCE_URL }}
+
+      - name: "Push SHARED package"
+        run: dotnet nuget push ${{ env.SHARED_PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s ${{ env.NUGET_SOURCE_URL }}
